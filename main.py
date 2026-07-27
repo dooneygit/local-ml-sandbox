@@ -17,3 +17,11 @@ print(f'{training_df.describe(include='all')}\n')
 
 print('Correlation Matrix')
 print(training_df.corr(numeric_only= True))
+
+pair_plot = px.scatter_matrix(
+    training_df, 
+    dimensions=["FARE", "TRIP_MILES", "TRIP_SECONDS"],
+)
+
+pair_plot.show()
+
