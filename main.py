@@ -13,7 +13,7 @@ print('Read dataset completed successfully.')
 print(f'Total rows: {len(training_df.index)}\n')
 
 print('Dataset Statistics')
-print(f'{training_df.describe(include='all')}\n')
+print(f"{training_df.describe(include='all')}\n")
 
 print('Correlation Matrix')
 print(training_df.corr(numeric_only= True))
