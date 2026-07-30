@@ -1,5 +1,6 @@
 import keras
-from hyperparameters import Hyperparameters
+from experiment import Hyperparameters, Experiment
+import pandas as pd
 
 def create_model(
     hyperparameters: Hyperparameters,
@@ -17,3 +18,27 @@ def create_model(
     )
 
     return model
+
+def train_model(
+    experiment_name: str,
+    model: keras.Model,
+    dataset: pd.Dataframe,
+    label_name: str,
+    settings: Hyperparameters
+) -> Experiment:
+    features = {name: dataset[name].values for name in settings.input_features}
+    label = dataset[label_name].values
+    history = model.fit(x=features,
+                        y=label,
+                        batch_size=Hyperparameters.batch_size,
+                        epochs=Hyperparameters.number_epochs)
+
+    return Experiment(
+        name=experiment_name,
+        settings=settings,
+        model=model,
+        epochs=history.epochs,
+        metrics_history=pd.DataFrame(history.history),
+    )
+
+    
