@@ -15,3 +15,5 @@ def create_model(
         loss = "mean_squared_error",
         metrics=metrics
     )
+
+    return model
