@@ -22,7 +22,7 @@ def create_model(
 def train_model(
     experiment_name: str,
     model: keras.Model,
-    dataset: pd.Dataframe,
+    dataset: pd.DataFrame,
     label_name: str,
     settings: Hyperparameters
 ) -> Experiment:
