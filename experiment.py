@@ -6,8 +6,8 @@ import pandas as pd
 class Hyperparameters:
     input_features: list[str]
     learning_rate: float
-    batch_size = int
-    number_epochs = int
+    batch_size: int
+    number_epochs: int
 
 @dataclass
 class Experiment:
