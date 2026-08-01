@@ -30,14 +30,14 @@ def train_model(
     label = dataset[label_name].values
     history = model.fit(x=features,
                         y=label,
-                        batch_size=Hyperparameters.batch_size,
-                        epochs=Hyperparameters.number_epochs)
+                        batch_size=settings.batch_size,
+                        epochs=settings.number_epochs)
 
     return Experiment(
         name=experiment_name,
         settings=settings,
         model=model,
-        epochs=history.epochs,
+        epochs=history.epoch,
         metrics_history=pd.DataFrame(history.history),
     )
 
