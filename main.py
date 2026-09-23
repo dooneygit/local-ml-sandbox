@@ -5,6 +5,7 @@ import plotly.express as px
 from experiment import Hyperparameters, Experiment
 from model import create_model, train_model
 from plot import plot_experiment_metrics, plot_model_predictions
+from prediction import predict_fare, show_predictions
 
 
 taxi_dataset = pd.read_csv("taxi_train.csv")
@@ -27,8 +28,10 @@ pair_plot = px.scatter_matrix(
 
 pair_plot.show()
 
-hyperparameters_1 = Hyperparameters(
-    input_features=["TRIP_MILES"],
+training_df["TRIP_MINUTES"] = training_df["TRIP_SECONDS"]/60
+
+hyperparameters = Hyperparameters(
+    input_features=["TRIP_MILES", "TRIP_SECONDS"],
     learning_rate=0.001,
     batch_size=50,
     number_epochs=20
@@ -36,9 +39,9 @@ hyperparameters_1 = Hyperparameters(
 
 metrics=[keras.metrics.RootMeanSquaredError(name='rmse')]
 
-model_1=create_model(hyperparameters_1, metrics)
+model=create_model(hyperparameters, metrics)
 
-experiment_1 = train_model('one_feature_test', model_1, training_df, 'FARE', hyperparameters_1)
+experiment_1 = train_model('test', model, training_df, 'FARE', hyperparameters)
 
 plot_experiment_metrics(experiment_1, ["rmse"])
 plot_model_predictions(experiment_1, training_df, "FARE")
