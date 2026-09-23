@@ -3,3 +3,6 @@
 
 # pycache
 __pycache__
+
+# Uploaded datasets and run artifacts
+data/
