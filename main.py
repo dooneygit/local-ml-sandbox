@@ -41,7 +41,10 @@ metrics=[keras.metrics.RootMeanSquaredError(name='rmse')]
 
 model=create_model(hyperparameters, metrics)
 
-experiment_1 = train_model('test', model, training_df, 'FARE', hyperparameters)
+experiment = train_model('test', model, training_df, 'FARE', hyperparameters)
 
-plot_experiment_metrics(experiment_1, ["rmse"])
-plot_model_predictions(experiment_1, training_df, "FARE")
+plot_experiment_metrics(experiment, ["rmse"])
+plot_model_predictions(experiment, training_df, "FARE")
+
+output = predict_fare(experiment.model, training_df, experiment.settings.input_features, 'FARE')
+show_predictions(output)
